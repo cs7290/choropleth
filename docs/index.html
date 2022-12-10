@@ -40,6 +40,26 @@
         padding-top: 10px;
     }
 
+    pre code {
+        display: block;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #d6d8e1;
+        background-color: #f0f1f4;
+        white-space: pre;
+        -webkit-overflow-scrolling: touch;
+        min-width: 60%;
+        width: fit-content;
+        padding: 0;
+        border-radius: 4px;
+    }
+
+    block {
+        display: block;
+        background-color: white;
+        width: 100%;
+    }
+
     nav-link {
         color: white;
     }
@@ -84,165 +104,199 @@
                         computing platform. First, using the pip package manager, install the pandas and
                         Observable-Jupyter packages. The pandas package will be used for reading in data, while
                         Observable-Jupyter will enable interaction with an Observable notebook.</p>
-                    <iframe
-                        src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-1/v/1&cellId=2&hideOutput=true"
-                        title="Jovian Viewer" height="88" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                    <iframe
-                        src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-1/v/1&cellId=3&hideOutput=true"
-                        title="Jovian Viewer" height="88" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                </div>
-                <p>Also, be sure to include the following import statements. The embed function is imported from
-                    Observable-Jupyter to include and modify Observable visualizations. The json package is imported
-                    such that quantitative data can be formatted as a JSON object. The requests package will be used to
-                    load in the JSON file including boundary information.</p>
-                <iframe
-                    src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-1/v/1&cellId=4&hideOutput=true"
-                    title="Jovian Viewer" height="148" width="100%" style="margin 0 auto; max-width: 800px;"
-                    frameborder="0" scrolling="auto"></iframe>
-            </div>
-        </div>
-
-        <div class="container mt-3" id="section3">
-            <div class="row">
-                <div class="col">
-                    <h1>Loading the Data</h1>
-                    <p>To update the choropleth map with new information, the input data must be readable by Observable.
-                        The following two cells provided below demonstrate how to do so. The to_json() function with
-                        orient paramter set to "records" converts the pandas data frame to a simple JSON format
-                        including column value pairs. The json package is then used to include proper indentation
-                        and return the data in the form of a JSON object. The get() function is used from requests to
-                        ensure the geographical data maintains its GeoJSON format.</p>
-                    <iframe
-                        src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-1/v/1&cellId=5&hideOutput=true"
-                        title="Jovian Viewer" height="183" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                    <iframe
-                        src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-1/v/1&cellId=6&hideOutput=true"
-                        title="Jovian Viewer" height="143" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container mt-3" id="section4">
-            <div class="row">
-                <div class="col">
-                    <h1>Linking Data with Boundary Information</h1>
-                    <p>In order to create a choropleth visualization, the data from each region must be connected with
-                        its boundary coordinates. A function exists within
-                        the Observable notebook that takes care of
-                        this, but specific inputs must be provided for successful mapping. This section will go over how
-                        to determine the "regional_name",
-                        "regional_data" and "comonality" inputs included in the next section. The following two cells
-                        are run to provide us with examples of how the data will be processed. Three strings must be
-                        extracted from these cells, the key associated with the name of each region, the key associated
-                        with the data from each region, and the property associated with the name of each boundary. In
-                        the case of this example, "State" represents the name of each state ("regional_name"), "Avg °F"
-                        ("regional_data") represents the
-                        data, and "NAME" represents the name of each boundary ("comonality"). Extracting this
-                        information is a crucial
-                        step, and each string must be entered correctly when entering inputs in the next step.</p>
-                    <iframe src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-1/v/1&cellId=7"
-                        title="Jovian Viewer" height="118" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                    <iframe src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-1/v/1&cellId=8"
-                        title="Jovian Viewer" height="202" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mt-3" id="section5">
-            <div class="row">
-                <div class="col">
-                    <h1>Embedding Data and Specifications</h1>
-                    <p>The final step is to embed the Observable Notebook into a Jupyter cell and include the data and
-                        specifications desired for the visualization. The cells we have embeded include the map as well
-                        as
-                        the Maplibre specific CSS stylesheet. The following inputs allow the user to customize the graph
+                    <pre><code>!pip install observable_jupyter</code></pre>
+                    <pre><code>!pip install pandas</code></pre>
+                    <p>Also, be sure to include the following import statements. The embed function is imported from
+                        Observable-Jupyter to include and modify Observable visualizations. The json package is imported
+                        such that quantitative data can be formatted as a JSON object. The requests package will be used
                         to
-                        their requirements.</p>
-                    <p></p>
-                    <p><strong>"map_data":</strong> The formatted data containing the geographical boundaries of each
-                        region</p>
-                    <p><strong>"quantitative_data": </strong>The formatted quantitative data</p>
-                    <p><strong>"regional_name": </strong> A string set to the key associated with the name of each
-                        region from "quantitative_data"</p>
-                    <p><strong>"regional_data": </strong> A string set to the the key associated
-                        with the data from each region from "quantitative_data" </p>
-                    <p><strong>"comonality": </strong> A string set to the property associated with each region from
-                        "map_data"</p>
-                    <p><strong>"toolTip_title": </strong>A list of two strings used for the map's popups. The first
-                        string titles the type of data being used, and the second string titles the units of each value
-                    </p>
-                    <p><strong>"Levels": </strong>A list of 7 numerical points ordered from smallest to largest that
-                        will partition the data into 7
-                        sections. Each section will be related to a color. Each of the sections are less than or equal
-                        to each of the values from the list. Ensure no data value is larger than the 7th number.</p>
-                    <p><strong>"center": </strong>A list representing the coordinates [longitude, latitude] of the
-                        center of the map</p>
-                    <p><strong>"zoom": </strong>A value used to set the initial zoom of the map (accepted values
-                        between 0 and 24)</p>
-                    <p><strong>"Colors": </strong>A list of CSS color codes representing the 7 colors related to each of
-                        the 7 sections
-                        of data</p>
-                    <iframe
-                        src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-2/v/1&cellId=9&hideOutput=true"
-                        title="Jovian Viewer" height="403" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                    <div id="observablehq-usMap-ffeb07ad"></div>
+                        load in the JSON file including boundary information.</p>
+                    <pre><code>from observable_jupyter import embed
+import pandas as pd
+import json
+import requests</code></pre>
+                </div>
+            </div>
 
-                    <p>The following example demonstrates a case in which the Maine County Subdivision boundaries are
-                        desired. For this example, embedding our data is much more straightforward, as the geographical
-                        boundaries are already loaded into the Observable Notebook. The inputs "map_data",
-                        "comonality", "center" and "zoom" inputs can be disregarded. </p>
-                    <iframe
-                        src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-2/v/1&cellId=10&hideOutput=true"
-                        title="Jovian Viewer" height="183" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                    <iframe
-                        src="https://jovian.ai/embed?url=https://jovian.ai/derekgmuse/choropleth-1/v/1&cellId=11&hideOutput=true"
-                        title="Jovian Viewer" height="303" width="100%" style="margin 0 auto; max-width: 800px;"
-                        frameborder="0" scrolling="auto"></iframe>
-                    <div id="observablehq-map-e9022220"></div>
+            <div class="container mt-3" id="section3">
+                <div class="row">
+                    <div class="col">
+                        <h1>Loading the Data</h1>
+                        <p>To update the choropleth map with new information, the input data must be readable by
+                            Observable.
+                            The following two cells provided below demonstrate how to do so. The to_json() function with
+                            orient paramter set to "records" converts the pandas data frame to a simple JSON format
+                            including column value pairs. The json package is then used to include proper indentation
+                            and return the data in the form of a JSON object. The get() function is used from requests
+                            to
+                            ensure the geographical data maintains its GeoJSON format.</p>
+                        <pre><code>temp_df = pd.read_csv('https://raw.githubusercontent.com/derekgmuse/choropleth/main/Demonstration%20Files/StateTemp.csv')
+result = temp_df.to_json(orient="records")
+parsed = json.loads(result)
+data = json.dumps(parsed, indent=4)
+Formatted_Data = json.loads(data)</code></pre>
+                        <pre><code>url = "https://raw.githubusercontent.com/derekgmuse/choropleth/main/Demonstration%20Files/gz_2010_us_040_00_20m.json"
+resp = requests.get(url)
+Boundary_Data = resp.json()</code></pre>
+                    </div>
 
                 </div>
             </div>
-        </div>
 
-        <div class="container mt-3" id="section4">
-            <div class="row">
-                <div class="col">
-                    <h1>Reference</h1>
-                    <p>This demonstration is a modification of the Leaflet Choropleth demonstration from the Observable
-                        Jupyter documentation that can be found <a
-                            href="https://observable-jupyter.readthedocs.io/en/latest/Leaflet_US_Choropleth.html">here</a>.
-
+            <div class="container mt-3" id="section4">
+                <div class="row">
+                    <div class="col">
+                        <h1>Linking Data with Boundary Information</h1>
+                        <p>In order to create a choropleth visualization, the data from each region must be connected
+                            with
+                            its boundary coordinates. A function exists within
+                            the Observable notebook that takes care of
+                            this, but specific inputs must be provided for successful mapping. This section will go over
+                            how
+                            to determine the "regional_name",
+                            "regional_data" and "comonality" inputs included in the next section. The following two
+                            cells
+                            are run to provide us with examples of how the data will be processed. Three strings must be
+                            extracted from these cells, the key associated with the name of each region, the key
+                            associated
+                            with the data from each region, and the property associated with the name of each boundary.
+                            In
+                            the case of this example, "State" represents the name of each state ("regional_name"), "Avg
+                            °F"
+                            ("regional_data") represents the
+                            data, and "NAME" represents the name of each boundary ("comonality"). Extracting this
+                            information is a crucial
+                            step, and each string must be entered correctly when entering inputs in the next step.</p>
+                        <pre><code>Formatted_Data[0]
+<block>{'State': 'Alabama', 'Avg °F': 62.8, 'Avg °C': 17.1, 'Rank': 7}</block></code></pre>
+                        <pre><code>Boundary_Data["features"][0]["properties"]
+<block>{'GEO_ID': '0400000US04',
+'STATE': '04',
+'NAME': 'Arizona',
+'LSAD': '',
+'CENSUSAREA': 113594.084}</block></code></pre>
+                    </div>
                 </div>
             </div>
+
+            <div class="container mt-3" id="section5">
+                <div class="row">
+                    <div class="col">
+                        <h1>Embedding Data and Specifications</h1>
+                        <p>The final step is to embed the Observable Notebook into a Jupyter cell and include the data
+                            and
+                            specifications desired for the visualization. The cells we have embeded include the map as
+                            well
+                            as
+                            the Maplibre specific CSS stylesheet. The following inputs allow the user to customize the
+                            graph
+                            to
+                            their requirements.</p>
+                        <p></p>
+                        <p><strong>"map_data":</strong> The formatted data containing the geographical boundaries of
+                            each
+                            region</p>
+                        <p><strong>"quantitative_data": </strong>The formatted quantitative data</p>
+                        <p><strong>"regional_name": </strong> A string set to the key associated with the name of each
+                            region from "quantitative_data"</p>
+                        <p><strong>"regional_data": </strong> A string set to the the key associated
+                            with the data from each region from "quantitative_data" </p>
+                        <p><strong>"comonality": </strong> A string set to the property associated with each region from
+                            "map_data"</p>
+                        <p><strong>"toolTip_title": </strong>A list of two strings used for the map's popups. The first
+                            string titles the type of data being used, and the second string titles the units of each
+                            value
+                        </p>
+                        <p><strong>"Levels": </strong>A list of 7 numerical points ordered from smallest to largest that
+                            will partition the data into 7
+                            sections. Each section will be related to a color. Each of the sections are less than or
+                            equal
+                            to each of the values from the list. Ensure no data value is larger than the 7th number.</p>
+                        <p><strong>"center": </strong>A list representing the coordinates [longitude, latitude] of the
+                            center of the map</p>
+                        <p><strong>"zoom": </strong>A value used to set the initial zoom of the map (accepted values
+                            between 0 and 24)</p>
+                        <p><strong>"Colors": </strong>A list of CSS color codes representing the 7 colors related to
+                            each of
+                            the 7 sections
+                            of data</p>
+                        <pre><code>embed("@derekgmuse/maine-county-subdivisions-choropleth",
+    cells = ["map", "style"],
+    inputs = { 
+        "map_data" : Boundary_Data,
+        "quantitative_data" : Formatted_Data,
+        "regional_name" : "State",
+        "regional_data" : "Avg °F",
+        "commonality" : "NAME",
+        "toolTip_title" : ["Average Temperature", "°F"],
+        "Levels" : [25, 33, 41, 49, 57, 65, 73],
+        "center" : [-98, 40],
+        "zoom" : 3,
+        "Colors" : ['#045a8d','#7fcdbb', '#c7e9b4','#fec44f', '#fe9929', '#d95f0e', '#993404']
+
+    }
+)</code></pre>
+                        <div id="observablehq-usMap-ffeb07ad"></div>
+
+                        <p>The following example demonstrates a case in which the Maine County Subdivision boundaries
+                            are
+                            desired. For this example, embedding our data is much more straightforward, as the
+                            geographical
+                            boundaries are already loaded into the Observable Notebook. The inputs "map_data",
+                            "comonality", "center" and "zoom" inputs can be disregarded. </p>
+                        <pre><code>pop_df = pd.read_csv('https://raw.githubusercontent.com/derekgmuse/choropleth/main/Demonstration%20Files/MainePopulation.csv')
+result = pop_df.to_json(orient="records")
+parsed = json.loads(result)
+data = json.dumps(parsed, indent=4)
+Formatted_Data2 = json.loads(data)</code></pre>
+                        <pre><code>embed("@derekgmuse/maine-county-subdivisions-choropleth",
+    cells = ["map", "style"],
+    inputs = { 
+        "quantitative_data" : Formatted_Data2,
+        "regional_name" : "Place",
+        "regional_data" : "2020 Total Population",
+        "toolTip_title" : ["Population", "people"],
+        "Levels" : [100, 1000, 5000, 10000, 15000, 25000, 70000],
+        "Colors" : ['#045a8d','#7fcdbb', '#c7e9b4','#fec44f', '#fe9929', '#d95f0e', '#993404']
+    }
+)</code></pre>
+                        <div id="observablehq-map-e9022220"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-3" id="section4">
+                <div class="row">
+                    <div class="col">
+                        <h1>Reference</h1>
+                        <p>This demonstration is a modification of the Leaflet Choropleth demonstration from the
+                            Observable
+                            Jupyter documentation that can be found <a
+                                href="https://observable-jupyter.readthedocs.io/en/latest/Leaflet_US_Choropleth.html">here</a>.
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
 
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-    <link href="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css" rel="stylesheet" />
-    <script type="module">
-        import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-        import define from "https://api.observablehq.com/@derekgmuse/maine-county-subdivisions-choropleth.js?v=3";
-        new Runtime().module(define, name => {
-            if (name === "map") return new Inspector(document.querySelector("#observablehq-map-e9022220"));
-        });
-    </script>
-    <script type="module">
-        import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-        import define from "https://api.observablehq.com/@derekgmuse/us-state-temperature-choropleth@609.js?v=3";
-        new Runtime().module(define, name => {
-            if (name === "usMap") return new Inspector(document.querySelector("#observablehq-usMap-ffeb07ad"));
-        });
-    </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+        <link href="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css" rel="stylesheet" />
+        <script type="module">
+            import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+            import define from "https://api.observablehq.com/@derekgmuse/maine-county-subdivisions-choropleth.js?v=3";
+            new Runtime().module(define, name => {
+                if (name === "map") return new Inspector(document.querySelector("#observablehq-map-e9022220"));
+            });
+        </script>
+        <script type="module">
+            import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+            import define from "https://api.observablehq.com/@derekgmuse/us-state-temperature-choropleth@609.js?v=3";
+            new Runtime().module(define, name => {
+                if (name === "usMap") return new Inspector(document.querySelector("#observablehq-usMap-ffeb07ad"));
+            });
+        </script>
 
 </body>
